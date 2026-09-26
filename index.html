@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Souvik & Tanusree — Wedding Celebration</title>
+  <meta name="description" content="Join us for the wedding celebration of Souvik and Tanusree at Love and Affection. December 13. Luxury dark burgundy, gold, and champagne aesthetic.">
+  
+  <!-- Google Fonts: Cormorant Garamond, Lora, Montserrat & Pinyon Script -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Montserrat:wght@200;300;400;500;600;700&family=Pinyon+Script&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="dark-theme">
+
+  <!-- Rose Petals & Golden Shimmer Falling Animation Canvas -->
+  <canvas id="petals-canvas" aria-hidden="true"></canvas>
+
+
+  <!-- Header Section -->
+  <header class="site-header" id="main-header">
+    <div class="header-container">
+      <!-- Left Navigation Links -->
+      <nav class="main-nav main-nav-left" aria-label="Left Navigation">
+        <ul class="nav-list">
+          <li><a href="#marriage-ceremony" class="nav-link" id="link-ceremony">MARRIAGE CEREMONY</a></li>
+          <li><a href="#elements-of-love" class="nav-link" id="link-elements">ELEMENTS OF LOVE</a></li>
+        </ul>
+      </nav>
+
+      <!-- Center Monogram -->
+      <a href="#hero" class="header-monogram" aria-label="Souvik & Tanusree">
+        <span class="monogram-letter">S</span>
+        <span class="monogram-amp">&amp;</span>
+        <span class="monogram-letter">T</span>
+      </a>
+
+      <!-- Right Group: Nav Links + Search + Mobile Toggle -->
+      <div class="header-right-group">
+        <nav class="main-nav main-nav-right" aria-label="Right Navigation">
+          <ul class="nav-list">
+            <li><a href="#gallery" class="nav-link" id="link-gallery">WEDDING ALBUM</a></li>
+            <li><a href="#wedding-day-info" class="nav-link" id="link-info">WEDDING DAY INFO</a></li>
+          </ul>
+        </nav>
+
+        <!-- Sleek Search Icon -->
+        <button class="header-icon-btn search-trigger" aria-label="Search" id="btn-search">
+          <svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+        </button>
+
+        <!-- Mobile Hamburger -->
+        <button class="mobile-menu-toggle" id="mobile-toggle" aria-label="Toggle Navigation Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Dropdown Menu -->
+  <div class="mobile-nav-drawer" id="mobile-drawer">
+    <ul class="mobile-nav-list">
+      <li><a href="#marriage-ceremony" class="mobile-link">MARRIAGE CEREMONY</a></li>
+      <li><a href="#elements-of-love" class="mobile-link">ELEMENTS OF LOVE</a></li>
+      <li><a href="#gallery" class="mobile-link">WEDDING ALBUM</a></li>
+      <li><a href="#wedding-day-info" class="mobile-link">WEDDING DAY INFORMATION</a></li>
+    </ul>
+  </div>
+
+<main>
+    <!-- TOP REFERENCE HERO SECTION (LARGE PROMINENT HERO AREA AT TOP) -->
+    <section class="reference-hero-section" id="hero">
+      <div class="reference-hero-wrapper">
+        
+        <!-- Grand Showcase Photo / SCRLA Scroll Wheel Film -->
+        <div class="grand-hero-frame-outer" id="scrla-track">
+          <div class="grand-hero-frame-inner">
+            <div class="grand-image-container scrla-container" id="scrla-container" data-title="Souvik &amp; Tanusree">
+              <canvas id="scrla-canvas" class="grand-hero-canvas" width="1920" height="1080"></canvas>
+              <img src="assets/scrla_frames/frame_000.jpg" alt="Souvik and Tanusree Wedding Film" class="grand-hero-img scrla-fallback" id="scrla-fallback">
+              <!-- Cinematic Gradient Overlay -->
+              <div class="grand-hero-overlay">
+                <!-- Interactive Mouse Wheel Scroll Cue -->
+                <div class="scrla-scroll-hint" id="scrla-hint" aria-hidden="true">
+                  <div class="mouse-icon">
+                    <span class="mouse-wheel-dot"></span>
+                  </div>
+                  <span class="mouse-hint-text">Scroll Wheel to Play Film</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Celebration Title (Pushed down before scratch section) -->
+        <div class="hero-top-intro" id="celebration-title">
+          <p class="hero-tagline">THE WEDDING CELEBRATION OF</p>
+          <h1 class="hero-main-title">Souvik <span>&</span> Tanusree</h1>
+          <p class="hero-subtext-date">Love is the beauty of the soul</p>
+          
+          <div class="gold-filigree-divider">
+            <span class="line"></span>
+            <span class="diamond">&#9670;</span>
+            <span class="line"></span>
+          </div>
+        </div>
+
+        <!-- Countdown Timer -->
+        <div class="wedding-countdown-container fade-in-scroll" id="countdown-wrap">
+          <h3 class="countdown-title">Time Until We Say "I Do"</h3>
+          <div class="countdown-timer" id="wedding-countdown">
+            <div class="time-block">
+              <span class="time-number" id="cd-days">00</span>
+              <span class="time-label">Days</span>
+            </div>
+            <span class="time-separator">:</span>
+            <div class="time-block">
+              <span class="time-number" id="cd-hours">00</span>
+              <span class="time-label">Hours</span>
+            </div>
+            <span class="time-separator">:</span>
+            <div class="time-block">
+              <span class="time-number" id="cd-minutes">00</span>
+              <span class="time-label">Minutes</span>
+            </div>
+            <span class="time-separator">:</span>
+            <div class="time-block">
+              <span class="time-number" id="cd-seconds">00</span>
+              <span class="time-label">Seconds</span>
+            </div>
+          </div>
+          <!-- Scratch Card Overlay Canvas -->
+          <canvas id="scratch-canvas" class="scratch-canvas"></canvas>
+          <p class="scratch-hint" id="scratch-hint">✦ SCRATCH TO REVEAL ✦</p>
+        </div>
+
+        <!-- NARRATIVE QUOTE SECTION -->
+        <section class="bottom-quote-section fade-in-scroll" id="story-quote">
+          <div class="bottom-quote-wrapper">
+            <div class="quote-card-dark">
+              <blockquote class="grand-serif-quote">
+                Souvik and Tanusree's love bloomed in quiet moments that felt like magic. Today, they celebrate a new chapter in their journey.
+              </blockquote>
+              <p class="quote-sub-narrative">
+                Surrounded by historic architecture, timeless music, and the warmth of cherished family and friends, their hearts unite forever.
+              </p>
+              <div class="gold-filigree-divider small-divider">
+                <span class="line"></span>
+                <span class="diamond">&#9670;</span>
+                <span class="line"></span>
+              </div>
+              <div class="couple-signatures-dark">
+                <span class="sig-name">Souvik</span>
+                <span class="sig-amp">&amp;</span>
+                <span class="sig-name">Tanusree</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- LOVE STORY TIMELINE / MARRIAGE CEREMONY SECTION -->
+        <section class="love-story-section fade-in-scroll" id="marriage-ceremony">
+          <span id="love-story"></span>
+          <div class="love-story-wrapper">
+            <h2 class="love-story-heading">Marriage Ceremony</h2>
+
+            <div class="love-story-timeline">
+
+              <!-- Entry 1: Marriage — text left, photo right -->
+              <div class="ls-entry ls-left">
+                <div class="ls-text-block">
+                  <h3 class="ls-event-title">Marriage</h3>
+                  <span class="ls-date">December 13, 2026</span>
+                  <p class="ls-desc">What greater thing is there for two human souls then to feel that they are joined for life — to strengthen each other in all labor, to rest on each other in all sorrow, to minister to each other in silent, unspeakable memories at the moment of the last parting?</p>
+                </div>
+                <div class="ls-center-dot"></div>
+                <div class="ls-photo-block">
+                  <div class="ls-circle-photo">
+                    <img src="assets/wedding_couple_hero_1787492919278.jpg" alt="Marriage">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Entry 2: Badhuboron — photo left, text right -->
+              <div class="ls-entry ls-right">
+                <div class="ls-photo-block">
+                  <div class="ls-circle-photo">
+                    <img src="assets/forest_walk.jpg" alt="Badhuboron">
+                  </div>
+                </div>
+                <div class="ls-center-dot"></div>
+                <div class="ls-text-block">
+                  <h3 class="ls-event-title">Badhuboron</h3>
+                  <span class="ls-date">December 14, 2026</span>
+                  <p class="ls-desc">Your smile brings sunshine into our lives. Welcome to your forever home, my love.</p>
+                </div>
+              </div>
+
+              <!-- Entry 3: Reception — text left, photo right -->
+              <div class="ls-entry ls-left">
+                <div class="ls-text-block">
+                  <h3 class="ls-event-title">Reception</h3>
+                  <span class="ls-date">December 15, 2026</span>
+                  <p class="ls-desc">Love is composed of a single soul inhabiting two bodies.</p>
+                </div>
+                <div class="ls-center-dot"></div>
+                <div class="ls-photo-block">
+                  <div class="ls-circle-photo">
+                    <img src="assets/wedding_kiss_1787494495893.jpg" alt="Reception">
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+
+    <!-- WEDDING DAY INFORMATION BLOCK -->
+
+
+        <!-- Inset Gallery Highlights right below the main photo -->
+              </div>
+    </section>
+
+    <!-- NARRATIVE DETAILS SECTION / THE ELEMENTS OF LOVE -->
+    <section class="narrative-details-section fade-in-scroll" id="elements-of-love">
+      <span id="story"></span>
+      <div class="section-container">
+        <div class="section-title-wrap">
+          <span class="section-tag-gold">TREASURED DETAILS</span>
+          <h2 class="section-title-dark">The Elements of Love</h2>
+          <div class="gold-filigree-divider">
+            <span class="line"></span>
+            <span class="diamond">&#9670;</span>
+            <span class="line"></span>
+          </div>
+        </div>
+        <div class="story-thumbnails-grid">
+          <div class="story-circle-item">
+            <div class="circle-gold-glow">
+              <div class="circle-frame-burgundy">
+                <img src="assets/wedding_rings_souvik_tanusree.jpg" alt="Souvik and Tanusree with wedding rings" class="circle-img" data-lightbox="assets/wedding_rings_souvik_tanusree.jpg" data-title="Souvik &amp; Tanusree — The Rings">
+              </div>
+            </div>
+            <div class="circle-label">
+              <span class="circle-label-num">01</span>
+              <span class="circle-label-text">THE RINGS</span>
+              <span class="circle-label-sub">Solitaire Diamond &amp; Gold</span>
+            </div>
+          </div>
+          <div class="story-circle-item">
+            <div class="circle-gold-glow is-square">
+              <div class="circle-frame-burgundy is-square">
+                <img src="assets/wedding_family_wide.jpg" alt="Souvik and Tanusree with family on stage" class="circle-img is-square" data-lightbox="assets/wedding_family_wide.jpg" data-title="Wedding Celebration with Family">
+              </div>
+            </div>
+            <div class="circle-label">
+              <span class="circle-label-num">02</span>
+              <span class="circle-label-text">THE FAMILY</span>
+              <span class="circle-label-sub">Blessings &amp; Togetherness</span>
+            </div>
+          </div>
+          <div class="story-circle-item">
+            <div class="circle-gold-glow">
+              <div class="circle-frame-burgundy">
+                <img src="assets/wedding_couple_portrait.png" alt="Souvik and Tanusree romantic portrait" class="circle-img" data-lightbox="assets/wedding_couple_portrait.png" data-title="Souvik &amp; Tanusree">
+              </div>
+            </div>
+            <div class="circle-label">
+              <span class="circle-label-num">03</span>
+              <span class="circle-label-text">COUPLE GOALS</span>
+              <span class="circle-label-sub">Forever &amp; Always</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WEDDING MOMENTS GALLERY SECTION (PREMIUM 3D COVERFLOW) -->
+    <section class="moments-section" id="gallery">
+      <div class="moments-burgundy-fullwidth">
+        <div class="moments-header">
+          <span class="moments-tag">CHERISHED CELEBRATION</span>
+          <h2 class="moments-title">MOMENTS FROM DIVINE</h2>
+          <p class="moments-desc">A celebration captured under romantic opera chandeliers and golden light</p>
+          <div class="gold-filigree-divider">
+            <span class="line"></span>
+            <span class="diamond">&#9670;</span>
+            <span class="line"></span>
+          </div>
+        </div>
+
+        <!-- 3D Luxury Coverflow Swiper -->
+        <div class="swiper moments-swiper" id="moments-swiper">
+          <div class="swiper-wrapper" id="moments-swiper-wrapper">
+            <!-- 56 slides generated dynamically by script.js -->
+          </div>
+
+          <!-- Luxury Navigation & Counter Controls -->
+          <div class="moments-controls-wrapper">
+            <button class="moments-nav-btn moments-prev" id="moments-prev" aria-label="Previous Slide">
+              <i class="fa-solid fa-chevron-left"></i>
+            </button>
+
+            <div class="moments-counter-pill">
+              <span id="moments-current-idx">01</span>
+              <span class="moments-counter-sep">/</span>
+              <span id="moments-total-count">56</span>
+            </div>
+
+            <button class="moments-nav-btn moments-next" id="moments-next" aria-label="Next Slide">
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PUZZLE SECTION (ONLY PUZZLE PIECES TO SOLVE) -->
+    <section class="family-puzzle-section" id="puzzle" aria-label="Puzzle">
+      <div class="puzzle-wrapper">
+        <!-- Target Board with faint silhouette -->
+        <div class="puzzle-board" id="puzzle-board">
+          <img src="assets/family_puzzle.jpg" alt="" class="puzzle-board-ghost" aria-hidden="true">
+          <div class="puzzle-slot" data-slot="0" id="puzzle-slot-0"></div>
+          <div class="puzzle-slot" data-slot="1" id="puzzle-slot-1"></div>
+          <div class="puzzle-slot" data-slot="2" id="puzzle-slot-2"></div>
+        </div>
+
+        <!-- Scattered pieces to solve -->
+        <div class="puzzle-scatter-tray" id="puzzle-scatter-tray">
+          <div class="puzzle-piece" data-piece="0" id="puzzle-piece-0" role="button" tabindex="0" aria-label="Puzzle Piece 1">
+            <img src="assets/puzzle_p1_crop.png" alt="Puzzle Piece 1" draggable="false">
+          </div>
+          <div class="puzzle-piece" data-piece="1" id="puzzle-piece-1" role="button" tabindex="0" aria-label="Puzzle Piece 2">
+            <img src="assets/puzzle_p2_crop.png" alt="Puzzle Piece 2" draggable="false">
+          </div>
+          <div class="puzzle-piece" data-piece="2" id="puzzle-piece-2" role="button" tabindex="0" aria-label="Puzzle Piece 3">
+            <img src="assets/puzzle_p3_crop.png" alt="Puzzle Piece 3" draggable="false">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="info-section" id="wedding-day-info">
+      <span id="rsvp"></span>
+      <div class="info-container">
+        <div class="sharp-burgundy-frame">
+          <div class="clean-beige-card">
+            <div class="card-header">
+              <span class="card-tag">YOU ARE CORDIALLY INVITED</span>
+              <h2 class="card-title">WEDDING DAY INFORMATION</h2>
+              <div class="card-gold-separator"></div>
+            </div>
+            <!-- Contact Phone Numbers -->
+            <div class="wedding-contact-row">
+              <i class="fa-solid fa-phone contact-icon"></i>
+              <span class="contact-label">FOR INQUIRIES &amp; ASSISTANCE:</span>
+              <div class="contact-numbers">
+                <a href="tel:7003822641" class="phone-link">7003822641</a>
+                <span class="phone-sep">/</span>
+                <a href="tel:9331725435" class="phone-link">9331725435</a>
+                <span class="phone-sep">/</span>
+                <a href="tel:824031337" class="phone-link">824031337</a>
+              </div>
+            </div>
+            <!-- Action Buttons -->
+            <div class="info-action-buttons">
+              <a href="https://maps.app.goo.gl/9WvdwE9ZHTkDyNcL9" target="_blank" class="gold-action-btn map-open-btn" aria-label="View Map and Directions">
+                <span class="btn-text">VIEW MAP</span>
+                <i class="fa-solid fa-map-location-dot btn-icon"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <p class="footer-credits">BY WEB DEVELOPER SATYAKI &amp; SAYANTAN</p>
+    </div>
+  </footer>
+
+  <!-- RSVP MODAL -->
+  <div class="custom-modal" id="rsvp-modal" aria-hidden="true">
+    <div class="modal-backdrop"></div>
+    <div class="modal-dialog">
+      <button class="modal-close-btn" id="rsvp-close-btn" aria-label="Close RSVP Modal">&times;</button>
+      <div class="modal-card-frame">
+        <div class="modal-inner-content">
+          <span class="modal-gold-tag">R.S.V.P.</span>
+          <h3 class="modal-title">Confirm Your Attendance</h3>
+          <p class="modal-subtitle">Kindly respond by September 15 for Souvik &amp; Tanusree's celebration.</p>
+          
+          <form id="rsvp-form" class="rsvp-form">
+            <div class="form-group">
+              <label for="guest-name">Full Name(s)</label>
+              <input type="text" id="guest-name" required placeholder="e.g. Lady Victoria & Lord Julian" class="form-control">
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label for="guest-email">Email Address</label>
+                <input type="email" id="guest-email" required placeholder="your.email@example.com" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="guest-phone">Phone Number</label>
+                <input type="tel" id="guest-phone" placeholder="9874785443" class="form-control">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="attendance-choice">Will you join us?</label>
+                <select id="attendance-choice" class="form-control">
+                  <option value="accept">Joyfully Accept (150 guest roster)</option>
+                  <option value="decline">Regretfully Decline</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="guest-dietary">Dietary Preferences</label>
+                <select id="guest-dietary" class="form-control">
+                  <option value="none">Standard Opera Banquet</option>
+                  <option value="vegetarian">Vegetarian Haute Cuisine</option>
+                  <option value="vegan">Vegan Gourmet</option>
+                  <option value="gluten-free">Gluten-Free</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="guest-note">A Note to the Couple</label>
+              <textarea id="guest-note" rows="3" placeholder="Leave your heartfelt wishes..." class="form-control"></textarea>
+            </div>
+
+            <button type="submit" class="gold-submit-btn">
+              <span>CONFIRM RSVP</span>
+              <i class="fa-solid fa-paper-plane"></i>
+            </button>
+          </form>
+          
+          <div id="rsvp-success-msg" class="rsvp-success" style="display:none;">
+            <i class="fa-solid fa-circle-check"></i>
+            <h4>Thank You!</h4>
+            <p>Your RSVP has been joyfully recorded. We look forward to welcoming you at Love and Affection on October 14!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAP MODAL -->
+  <div class="custom-modal" id="map-modal" aria-hidden="true">
+    <div class="modal-backdrop"></div>
+    <div class="modal-dialog modal-dialog-wide">
+      <button class="modal-close-btn" id="map-close-btn" aria-label="Close Map Modal">&times;</button>
+      <div class="modal-card-frame">
+        <div class="modal-inner-content">
+          <span class="modal-gold-tag">LOCATION &amp; ARRIVAL</span>
+          <h3 class="modal-title">Love and Affection</h3>
+          <p class="modal-subtitle">100 Symphony Way, Historic Arts District Ã¢â‚¬Â¢ Valet Parking Provided</p>
+          
+          <div class="map-interactive-preview">
+            <div class="map-illustration">
+              <div class="map-pin">
+                <i class="fa-solid fa-landmark"></i>
+                <span>Love and Affection Main Entrance</span>
+              </div>
+              <div class="map-meta-info">
+                <p><strong>Dress Code:</strong> Formal Black-Tie (Burgundy &amp; Gold accents welcome)</p>
+                <p><strong>Valet Parking:</strong> Available at the Grand Opera Portico from 3:45 PM</p>
+                <p><strong>Accommodation:</strong> Preferred rates reserved at The Grand Royale Hotel</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-actions-center">
+            <a href="https://maps.google.com" target="_blank" rel="noopener" class="gold-submit-btn" style="text-decoration:none; display:inline-flex; align-items:center; justify-content:center; gap:8px;">
+              <span>OPEN IN GOOGLE MAPS</span>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEARCH MODAL -->
+  <div class="custom-modal" id="search-modal" aria-hidden="true">
+    <div class="modal-backdrop"></div>
+    <div class="modal-dialog">
+      <button class="modal-close-btn" id="search-close-btn" aria-label="Close Search">&times;</button>
+      <div class="modal-card-frame">
+        <div class="modal-inner-content">
+          <h3 class="modal-title">Search Wedding Details</h3>
+          <div class="search-input-wrap">
+            <input type="text" id="wedding-search-input" class="form-control" placeholder="Search (e.g. venue, date, schedule, registry, guest count)...">
+            <i class="fa-solid fa-magnifying-glass search-field-icon"></i>
+          </div>
+          <div id="search-quick-tags" class="search-quick-tags">
+            <span>Quick:</span>
+            <button class="search-chip" data-search="venue">Love and Affection</button>
+            <button class="search-chip" data-search="date">October 14</button>
+            <button class="search-chip" data-search="rsvp">RSVP</button>
+            <button class="search-chip" data-search="150">150 Guests</button>
+          </div>
+          <div id="search-results-box" class="search-results-box"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox-overlay" id="lightbox" aria-hidden="true">
+    <div class="lightbox-backdrop"></div>
+    <button class="lightbox-close" id="lightbox-close" aria-label="Close Lightbox">&times;</button>
+    <div class="lightbox-content">
+      <img src="" alt="" id="lightbox-img" class="lightbox-img">
+      <p id="lightbox-title" class="lightbox-title"></p>
+    </div>
+  </div>
+
+  <!-- BACKGROUND MUSIC -->
+  <audio id="bg-music" src="assets/background_music.mp3" loop></audio>
+  <button id="music-toggle-btn" class="music-toggle-btn" aria-label="Toggle Background Music">
+    <i class="fa-solid fa-music"></i>
+  </button>
+
+  <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <!-- Script -->
+  <script src="script.js"></script>
+</body>
+</html>
