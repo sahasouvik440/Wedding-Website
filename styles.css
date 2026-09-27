@@ -1131,6 +1131,10 @@ h1, h2, h3, h4, h5, h6,
   display: block;
 }
 
+.ls-circle-photo.ls-photo-marriage img {
+  object-position: center 68%;
+}
+
 /* Responsive */
 @media (max-width: 700px) {
   .love-story-timeline::before { left: 20px; }
