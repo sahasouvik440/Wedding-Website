@@ -360,12 +360,14 @@ function initMobileNav() {
 
   toggle.addEventListener('click', () => {
     drawer.classList.toggle('open');
+    toggle.classList.toggle('active');
   });
 
   const links = drawer.querySelectorAll('.mobile-link');
   links.forEach(link => {
     link.addEventListener('click', () => {
       drawer.classList.remove('open');
+      toggle.classList.remove('active');
     });
   });
 }
@@ -455,43 +457,118 @@ function initCountdown() {
 
 
 /* ==========================================================================
-   SCROLL ANIMATIONS (INTERSECTION OBSERVER)
+   SCROLL ANIMATIONS — PREMIUM INTERSECTION OBSERVER
    ========================================================================== */
 function initScrollAnimations() {
-  const scrollElements = document.querySelectorAll('.fade-in-scroll');
-  
-  if (scrollElements.length === 0) return;
+  // ── Main fade-in elements ──────────────────────────────────────────────
+  const fadeEls = document.querySelectorAll('.fade-in-scroll');
+  if (fadeEls.length > 0) {
+    const fadeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+        } else {
+          entry.target.classList.remove('is-visible');
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
-  const elementInView = (el, dividend = 1) => {
-    const elementTop = el.getBoundingClientRect().top;
-    return (elementTop <= (window.innerHeight || document.documentElement.clientHeight) / dividend);
-  };
-
-  const displayScrollElement = (element) => {
-    element.classList.add('is-visible');
-  };
-
-  const hideScrollElement = (element) => {
-    element.classList.remove('is-visible');
-  };
-
-  const handleScrollAnimation = () => {
-    scrollElements.forEach((el) => {
-      if (elementInView(el, 1.1)) {
-        displayScrollElement(el);
-      } else {
-        hideScrollElement(el);
-      }
-    });
+    fadeEls.forEach(el => fadeObserver.observe(el));
   }
 
-  // Initial check on load
-  handleScrollAnimation();
-  
-  // Check on scroll
-  window.addEventListener('scroll', () => {
-    handleScrollAnimation();
+  // ── Timeline entries — staggered slide-in ──────────────────────────────
+  const timelineEntries = document.querySelectorAll('.ls-entry');
+  timelineEntries.forEach((entry, i) => {
+    entry.style.opacity = '0';
+    entry.style.transform = i % 2 === 0
+      ? 'translateX(-50px)' : 'translateX(50px)';
   });
+
+  const timelineObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const delay = entry.target.dataset.index * 150;
+        setTimeout(() => {
+          entry.target.style.opacity    = '1';
+          entry.target.style.transform  = 'translateX(0)';
+        }, delay);
+        timelineObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  timelineEntries.forEach((el, i) => {
+    el.dataset.index = i;
+    timelineObserver.observe(el);
+  });
+
+  // ── Circle items — staggered scale-in ─────────────────────────────────
+  const circleItems = document.querySelectorAll('.story-circle-item');
+  circleItems.forEach(item => {
+    item.style.opacity = '0';
+    item.style.transform = 'translateY(40px) scale(0.9)';
+  });
+
+  const circleObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const delay = (entry.target.dataset.idx || 0) * 120;
+        setTimeout(() => {
+          entry.target.style.opacity   = '1';
+          entry.target.style.transform = 'translateY(0) scale(1)';
+        }, delay);
+        circleObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  circleItems.forEach((el, i) => {
+    el.dataset.idx = i;
+    circleObserver.observe(el);
+  });
+
+  // ── Time blocks — staggered pop-in ────────────────────────────────────
+  const timeBlocks = document.querySelectorAll('.time-block');
+  timeBlocks.forEach((block, i) => {
+    block.style.opacity   = '0';
+    block.style.transform = 'translateY(24px) scale(0.92)';
+    block.style.transition = `opacity 0.6s ease ${i * 0.1}s, transform 0.6s cubic-bezier(0.34,1.4,0.64,1) ${i * 0.1}s`;
+  });
+
+  const timerObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('.time-block').forEach(b => {
+          b.style.opacity   = '1';
+          b.style.transform = 'translateY(0) scale(1)';
+        });
+        timerObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  const countdown = document.querySelector('.wedding-countdown-container');
+  if (countdown) timerObserver.observe(countdown);
+
+  // ── Info card — zoom-in ────────────────────────────────────────────────
+  const infoCard = document.querySelector('.sharp-burgundy-frame');
+  if (infoCard) {
+    infoCard.style.opacity   = '0';
+    infoCard.style.transform = 'scale(0.94) translateY(30px)';
+    infoCard.style.transition = 'opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1)';
+
+    const cardObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity   = '1';
+          entry.target.style.transform = 'scale(1) translateY(0)';
+          cardObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    cardObserver.observe(infoCard);
+  }
 }
 
 // Background Music Toggle
