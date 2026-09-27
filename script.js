@@ -620,7 +620,9 @@ function initScratchCard() {
   let revealed = false;
 
   function resizeCanvas() {
+    if (revealed) return;
     const rect = wrap.getBoundingClientRect();
+    if (rect.width === 0 || rect.height === 0) return;
     canvas.width  = rect.width;
     canvas.height = rect.height;
     drawSprayPaint();

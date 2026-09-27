@@ -1132,7 +1132,15 @@ h1, h2, h3, h4, h5, h6,
 }
 
 .ls-circle-photo.ls-photo-marriage img {
-  object-position: center 68%;
+  object-position: center 48%;
+}
+
+.ls-circle-photo.ls-photo-badhuboron img {
+  object-position: center 52%;
+}
+
+.ls-circle-photo.ls-photo-reception img {
+  object-position: center 30%;
 }
 
 /* Responsive */
