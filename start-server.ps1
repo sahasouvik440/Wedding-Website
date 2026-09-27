@@ -47,8 +47,10 @@ public class SimpleHttpServer
                 if (ext == ".html") mime = "text/html; charset=utf-8";
                 else if (ext == ".css") mime = "text/css; charset=utf-8";
                 else if (ext == ".js") mime = "application/javascript; charset=utf-8";
+                else if (ext == ".json") mime = "application/json; charset=utf-8";
                 else if (ext == ".jpg" || ext == ".jpeg") mime = "image/jpeg";
                 else if (ext == ".png") mime = "image/png";
+                else if (ext == ".webp") mime = "image/webp";
                 else if (ext == ".svg") mime = "image/svg+xml";
                 else if (ext == ".mp3") mime = "audio/mpeg";
 
