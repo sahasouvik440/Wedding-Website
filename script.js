@@ -615,16 +615,17 @@ function initScratchCard() {
 
   const ctx = canvas.getContext('2d');
   let isScratching = false;
-  let scratchedPixels = 0;
-  let totalPixels = 0;
   let revealed = false;
+  let lastX = null;
+  let lastY = null;
 
   function resizeCanvas() {
     if (revealed) return;
     const rect = wrap.getBoundingClientRect();
     if (rect.width === 0 || rect.height === 0) return;
-    canvas.width  = rect.width;
-    canvas.height = rect.height;
+    if (Math.abs(canvas.width - Math.round(rect.width)) < 2 && Math.abs(canvas.height - Math.round(rect.height)) < 2) return;
+    canvas.width  = Math.round(rect.width);
+    canvas.height = Math.round(rect.height);
     drawSprayPaint();
   }
 
@@ -641,8 +642,8 @@ function initScratchCard() {
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, w, h);
 
-    // Spray paint splatter dots for texture
-    for (let i = 0; i < 3000; i++) {
+    // Spray paint splatter dots for luxury texture
+    for (let i = 0; i < 2800; i++) {
       const x = Math.random() * w;
       const y = Math.random() * h;
       const r = Math.random() * 4 + 0.5;
@@ -655,16 +656,14 @@ function initScratchCard() {
     }
 
     // Gold shimmer highlights
-    for (let i = 0; i < 600; i++) {
+    for (let i = 0; i < 500; i++) {
       const x = Math.random() * w;
       const y = Math.random() * h;
       ctx.beginPath();
       ctx.arc(x, y, Math.random() * 2, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(255,230,100,${Math.random() * 0.6})`;
+      ctx.fillStyle = `rgba(255,235,120,${Math.random() * 0.7})`;
       ctx.fill();
     }
-
-    totalPixels = w * h;
   }
 
   function hideHint() {
@@ -673,37 +672,55 @@ function initScratchCard() {
     }
   }
 
-  function scratch(x, y) {
-    hideHint();
+  function scratchDot(x, y) {
     ctx.globalCompositeOperation = 'destination-out';
-    // Eraser brush - spray effect (2x size)
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 22; i++) {
       const angle  = Math.random() * Math.PI * 2;
-      const radius = Math.random() * 44;
+      const radius = Math.random() * 48;
       const ex = x + radius * Math.cos(angle);
       const ey = y + radius * Math.sin(angle);
       ctx.beginPath();
-      ctx.arc(ex, ey, Math.random() * 20 + 12, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(0,0,0,${Math.random() * 0.8 + 0.2})`;
+      ctx.arc(ex, ey, Math.random() * 22 + 14, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(0,0,0,1)';
       ctx.fill();
     }
     ctx.globalCompositeOperation = 'source-over';
+  }
 
-    // Check reveal progress every 30 scratches
+  function scratch(x, y) {
+    hideHint();
+    if (lastX !== null && lastY !== null) {
+      const dist = Math.hypot(x - lastX, y - lastY);
+      const steps = Math.max(1, Math.min(25, Math.floor(dist / 14)));
+      for (let i = 1; i <= steps; i++) {
+        const t = i / steps;
+        scratchDot(lastX + (x - lastX) * t, lastY + (y - lastY) * t);
+      }
+    } else {
+      scratchDot(x, y);
+    }
+    lastX = x;
+    lastY = y;
     if (!revealed) checkReveal();
   }
 
   let checkCount = 0;
-  function checkReveal() {
+  function checkReveal(forceCheck = false) {
     checkCount++;
-    if (checkCount % 30 !== 0) return;
-    const data = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
-    let transparent = 0;
-    for (let i = 3; i < data.length; i += 4) {
-      if (data[i] < 10) transparent++;
-    }
-    const pct = (transparent / (canvas.width * canvas.height)) * 100;
-    if (pct > 55) autoReveal();
+    if (!forceCheck && checkCount % 12 !== 0) return;
+    try {
+      const data = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+      let transparent = 0;
+      let totalSampled = 0;
+      for (let i = 3; i < data.length; i += 16) {
+        totalSampled++;
+        if (data[i] < 30) transparent++;
+      }
+      const pct = (transparent / totalSampled) * 100;
+      if (pct > 38 || (forceCheck && pct > 30)) {
+        autoReveal();
+      }
+    } catch (err) {}
   }
 
   function autoReveal() {
@@ -714,36 +731,79 @@ function initScratchCard() {
 
   function getPos(e) {
     const rect = canvas.getBoundingClientRect();
+    const t = (e.touches && e.touches.length > 0) ? e.touches[0] : 
+              ((e.changedTouches && e.changedTouches.length > 0) ? e.changedTouches[0] : e);
     const scaleX = canvas.width  / rect.width;
     const scaleY = canvas.height / rect.height;
-    if (e.touches) {
-      return {
-        x: (e.touches[0].clientX - rect.left) * scaleX,
-        y: (e.touches[0].clientY - rect.top)  * scaleY
-      };
-    }
     return {
-      x: (e.clientX - rect.left) * scaleX,
-      y: (e.clientY - rect.top)  * scaleY
+      x: (t.clientX - rect.left) * scaleX,
+      y: (t.clientY - rect.top)  * scaleY
     };
   }
 
-  canvas.addEventListener('mousedown',  (e) => { isScratching = true; hideHint(); scratch(...Object.values(getPos(e))); });
-  canvas.addEventListener('mousemove',  (e) => { if (isScratching) scratch(...Object.values(getPos(e))); });
-  canvas.addEventListener('mouseup',    ()  => { isScratching = false; });
-  canvas.addEventListener('mouseleave', ()  => { isScratching = false; });
-  canvas.addEventListener('touchstart', (e) => { e.preventDefault(); isScratching = true; hideHint(); scratch(...Object.values(getPos(e))); }, { passive: false });
-  canvas.addEventListener('touchmove',  (e) => { e.preventDefault(); if (isScratching) scratch(...Object.values(getPos(e))); }, { passive: false });
-  canvas.addEventListener('touchend',   ()  => { isScratching = false; });
-
-  if (hint) {
-    hint.addEventListener('click', hideHint);
-    hint.addEventListener('touchstart', hideHint, { passive: true });
+  function stopScratching() {
+    isScratching = false;
+    lastX = null;
+    lastY = null;
+    if (!revealed) checkReveal(true);
   }
 
-  // Init after layout
-  setTimeout(resizeCanvas, 300);
+  // Mouse controls
+  canvas.addEventListener('mousedown', (e) => {
+    isScratching = true;
+    const p = getPos(e);
+    lastX = p.x;
+    lastY = p.y;
+    scratch(p.x, p.y);
+  });
+  canvas.addEventListener('mousemove', (e) => {
+    if (isScratching) {
+      const p = getPos(e);
+      scratch(p.x, p.y);
+    }
+  });
+  canvas.addEventListener('mouseup', stopScratching);
+  canvas.addEventListener('mouseleave', stopScratching);
+
+  // Mobile Touch controls
+  canvas.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    isScratching = true;
+    const p = getPos(e);
+    lastX = p.x;
+    lastY = p.y;
+    scratch(p.x, p.y);
+  }, { passive: false });
+
+  canvas.addEventListener('touchmove', (e) => {
+    e.preventDefault();
+    if (isScratching) {
+      const p = getPos(e);
+      scratch(p.x, p.y);
+    }
+  }, { passive: false });
+
+  canvas.addEventListener('touchend', (e) => {
+    e.preventDefault();
+    stopScratching();
+  }, { passive: false });
+
+  canvas.addEventListener('touchcancel', stopScratching);
+
+  if (hint) {
+    hint.addEventListener('click', () => { hideHint(); });
+    hint.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      hideHint();
+    }, { passive: false });
+  }
+
+  // Initialize and handle window changes
+  setTimeout(resizeCanvas, 100);
+  setTimeout(resizeCanvas, 400);
+  setTimeout(resizeCanvas, 1000);
   window.addEventListener('resize', resizeCanvas);
+  window.addEventListener('orientationchange', () => setTimeout(resizeCanvas, 300));
 }
 
 /* ==========================================================================

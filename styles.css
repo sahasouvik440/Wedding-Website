@@ -2503,15 +2503,15 @@ h1, h2, h3, h4, h5, h6,
 /* Countdown Timer Styles */
 .wedding-countdown-container {
   text-align: center;
-  margin: 0;
-  padding: 0;
-  background: var(--bg-dark-card);
-  border: none;
-  width: 100vw;
-  min-height: 60vh;
   position: relative;
-  left: 50%;
-  margin-left: -50vw;
+  left: 0;
+  margin: 32px auto 44px;
+  padding: 36px 24px 48px;
+  max-width: 900px;
+  width: calc(100% - 32px);
+  background: var(--bg-dark-card);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  border-radius: 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -2858,6 +2858,11 @@ h1, h2, h3, h4, h5, h6,
 #countdown-wrap {
   position: relative;
   overflow: hidden;
+  left: 0 !important;
+  right: 0 !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  box-sizing: border-box;
 }
 
 .scratch-canvas {
@@ -2868,7 +2873,11 @@ h1, h2, h3, h4, h5, h6,
   height: 100%;
   cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='28' fill='rgba(255,255,255,0.4)' stroke='%23fff' stroke-width='2'/%3E%3C/svg%3E") 32 32, crosshair;
   z-index: 10;
-  border-radius: 0;
+  border-radius: inherit;
+  touch-action: none;
+  -webkit-touch-callout: none;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .scratch-canvas.revealed {
@@ -3317,7 +3326,15 @@ h1, h2, h3, h4, h5, h6,
   .hero-subtext-date { font-size: 0.78rem; letter-spacing: 3px; }
 
   /* Countdown */
-  .wedding-countdown-container { margin: 20px auto 40px; padding: 24px 16px 44px; }
+  .wedding-countdown-container {
+    margin: 20px auto 40px !important;
+    padding: 24px 16px 44px;
+    left: 0 !important;
+    right: 0 !important;
+    width: calc(100% - 32px) !important;
+    max-width: 800px !important;
+    box-sizing: border-box;
+  }
   .countdown-title { font-size: 1rem; letter-spacing: 2.5px; margin-bottom: 20px; }
   .countdown-timer { gap: 12px; }
   .time-number { font-size: 4.5rem; }
@@ -3431,7 +3448,16 @@ h1, h2, h3, h4, h5, h6,
   .gold-filigree-divider { max-width: 240px; gap: 10px; }
 
   /* Countdown */
-  .wedding-countdown-container { padding: 20px 12px 36px; margin: 16px auto 32px; border-radius: 16px; }
+  .wedding-countdown-container {
+    padding: 22px 14px 36px;
+    margin: 16px auto 32px !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: calc(100% - 24px) !important;
+    max-width: 480px !important;
+    border-radius: 18px;
+    box-sizing: border-box;
+  }
   .countdown-title { font-size: 0.85rem; letter-spacing: 2px; margin-bottom: 16px; }
   .countdown-timer { gap: 6px; }
   .time-block { min-width: 64px; padding: 10px 8px; border-radius: 10px; }
@@ -3533,6 +3559,15 @@ h1, h2, h3, h4, h5, h6,
   .hero-main-title span { font-size: 2.1rem; }
   .love-story-heading { font-size: 2rem; }
 
+  .wedding-countdown-container {
+    width: calc(100% - 16px) !important;
+    max-width: 360px !important;
+    padding: 18px 8px 28px;
+    margin: 12px auto 24px !important;
+    left: 0 !important;
+    right: 0 !important;
+    box-sizing: border-box;
+  }
   .countdown-timer { flex-wrap: wrap; justify-content: center; row-gap: 10px; }
   .time-block { min-width: 56px; }
   .time-number { font-size: 2.4rem; }
@@ -3694,6 +3729,13 @@ h1, h2, h3, h4, h5, h6,
 
 /* ── COUNTDOWN TIMER PREMIUM ─────────────────────────────────────────────── */
 .wedding-countdown-container {
+  position: relative;
+  left: 0 !important;
+  right: 0 !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  width: calc(100% - 32px);
+  max-width: 900px;
   background:
     linear-gradient(135deg, rgba(28,5,11,0.92) 0%, rgba(20,3,8,0.88) 50%, rgba(35,7,15,0.92) 100%);
   backdrop-filter: blur(20px) saturate(150%);
@@ -3705,8 +3747,8 @@ h1, h2, h3, h4, h5, h6,
     0 0 0 1px rgba(212,175,55,0.08),
     inset 0 1px 0 rgba(255,255,255,0.06),
     inset 0 -1px 0 rgba(0,0,0,0.2);
-  position: relative;
   overflow: hidden;
+  box-sizing: border-box;
 }
 
 /* Animated top border accent on countdown */
