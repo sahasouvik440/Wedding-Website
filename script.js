@@ -811,7 +811,24 @@ function initWeddingMomentsGallery() {
   const swiperEl = document.getElementById('moments-swiper');
   if (!wrapper || !swiperEl) return;
 
-  const totalPhotos = 56;
+  // Excluded photos per user request: 1-18, 27, 31, 35, 36, 42, 44, 46, 51, 52
+  const excludedPhotoIds = new Set([
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+    27, 31, 35, 36, 42, 44, 46, 51, 52
+  ]);
+
+  const photoIds = [];
+  for (let i = 1; i <= 56; i++) {
+    if (!excludedPhotoIds.has(i)) {
+      photoIds.push(i);
+    }
+  }
+
+  const totalCountEl = document.getElementById('moments-total-count');
+  if (totalCountEl) {
+    totalCountEl.textContent = String(photoIds.length).padStart(2, '0');
+  }
+
   const captions = [
     "Royal Grandeur • The Grand Opera",
     "Golden Chandelier • Luminous Love",
@@ -831,18 +848,19 @@ function initWeddingMomentsGallery() {
     "Crowned in Joy • Our Sacred Chapter"
   ];
 
-  // Dynamically populate all 56 wedding photos
+  // Dynamically populate remaining wedding photos
   let slidesHTML = '';
-  for (let i = 1; i <= totalPhotos; i++) {
-    const numStr = String(i).padStart(2, '0');
+  photoIds.forEach((photoId, idx) => {
+    const numStr = String(photoId).padStart(2, '0');
     const photoSrc = `assets/gallery_album/photo_${numStr}.jpg`;
-    const captionText = captions[(i - 1) % captions.length];
-    const slideTitle = `Souvik & Tanusree • Moment ${numStr}`;
+    const captionText = captions[idx % captions.length];
+    const displayNum = String(idx + 1).padStart(2, '0');
+    const slideTitle = `Souvik & Tanusree • Moment ${displayNum}`;
 
     slidesHTML += `
-      <div class="swiper-slide" data-slide-index="${i - 1}">
+      <div class="swiper-slide" data-slide-index="${idx}">
         <div class="moment-premium-card" data-lightbox="${photoSrc}" data-title="${slideTitle} - ${captionText}">
-          <img src="${photoSrc}" alt="${slideTitle}" class="moment-img" loading="${i <= 4 ? 'eager' : 'lazy'}">
+          <img src="${photoSrc}" alt="${slideTitle}" class="moment-img" loading="${idx <= 4 ? 'eager' : 'lazy'}">
           <div class="moment-card-gradient"></div>
           <div class="moment-card-border-glow"></div>
           <div class="moment-corner-tl"></div>
@@ -857,7 +875,7 @@ function initWeddingMomentsGallery() {
         </div>
       </div>
     `;
-  }
+  });
   wrapper.innerHTML = slidesHTML;
 
   // Initialize Swiper 3D Coverflow
