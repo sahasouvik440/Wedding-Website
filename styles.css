@@ -3136,7 +3136,8 @@ h1, h2, h3, h4, h5, h6,
 .music-toggle-btn {
   position: fixed;
   bottom: 28px;
-  right: 28px;
+  left: 28px;
+  right: auto;
   width: 52px;
   height: 52px;
   border-radius: 50%;
@@ -3204,7 +3205,8 @@ h1, h2, h3, h4, h5, h6,
 
   .music-toggle-btn {
     bottom: 20px;
-    right: 20px;
+    left: 20px;
+    right: auto;
     width: 44px;
     height: 44px;
     font-size: 1rem;
@@ -3528,7 +3530,7 @@ h1, h2, h3, h4, h5, h6,
   .lightbox-title { font-size: 0.8rem; }
 
   /* Music button */
-  .music-toggle-btn { bottom: 16px; right: 16px; width: 40px; height: 40px; font-size: 0.95rem; }
+  .music-toggle-btn { bottom: 16px; left: 16px; right: auto; width: 40px; height: 40px; font-size: 0.95rem; }
 
   /* Footer */
   .site-footer { padding: 20px 12px; }
