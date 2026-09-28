@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 /* ==========================================================================
-   ROSE PETALS CASCADING CANVAS ANIMATION
+   AUTHENTIC FLOATING ROSE PETALS CASCADING CANVAS ANIMATION
    ========================================================================== */
 function initPetalAnimation() {
   const canvas = document.getElementById('petals-canvas');
@@ -40,16 +40,62 @@ function initPetalAnimation() {
     height = canvas.height = window.innerHeight;
   });
 
-  const petalCount = 45; // Balanced count for elegance and performance
+  const isMobile = window.innerWidth < 650;
+  const petalCount = isMobile ? 32 : 52;
   const petals = [];
 
-  // Color palettes for white and burgundy petals
-  const petalColors = [
-    { fill: 'rgba(255, 250, 250, 0.75)', stroke: 'rgba(235, 220, 220, 0.4)', type: 'white' },
-    { fill: 'rgba(255, 245, 245, 0.85)', stroke: 'rgba(240, 210, 215, 0.5)', type: 'ivory' },
-    { fill: 'rgba(110, 18, 37, 0.65)',   stroke: 'rgba(74, 10, 24, 0.7)',   type: 'burgundy' },
-    { fill: 'rgba(142, 28, 51, 0.7)',    stroke: 'rgba(88, 11, 24, 0.8)',   type: 'deep-rose' },
-    { fill: 'rgba(77, 10, 24, 0.6)',     stroke: 'rgba(45, 5, 11, 0.8)',    type: 'velvet-wine' }
+  // Luxury wedding rose petal color palettes
+  const rosePalettes = [
+    // 1. Royal Velvet Crimson
+    {
+      top: '#e31b44',
+      mid: '#b01131',
+      base: '#73061c',
+      backTop: '#cf2549',
+      backBase: '#8e0d27',
+      vein: 'rgba(255, 180, 195, 0.28)',
+      edge: 'rgba(255, 120, 140, 0.4)'
+    },
+    // 2. Deep Ruby Red
+    {
+      top: '#c91438',
+      mid: '#960b24',
+      base: '#580212',
+      backTop: '#b31837',
+      backBase: '#70071c',
+      vein: 'rgba(255, 150, 170, 0.25)',
+      edge: 'rgba(255, 90, 115, 0.35)'
+    },
+    // 3. Romantic Scarlet
+    {
+      top: '#ef2d55',
+      mid: '#c4183d',
+      base: '#870b24',
+      backTop: '#db395c',
+      backBase: '#9c1432',
+      vein: 'rgba(255, 200, 215, 0.32)',
+      edge: 'rgba(255, 140, 160, 0.45)'
+    },
+    // 4. Soft Blush Wedding Rose
+    {
+      top: '#fca8b9',
+      mid: '#e8728a',
+      base: '#b83e58',
+      backTop: '#fdbdca',
+      backBase: '#cf5a73',
+      vein: 'rgba(255, 245, 248, 0.45)',
+      edge: 'rgba(255, 215, 225, 0.6)'
+    },
+    // 5. Ivory Rose with Blush Trim
+    {
+      top: '#fff8f9',
+      mid: '#fde0e6',
+      base: '#f4adc0',
+      backTop: '#fff2f5',
+      backBase: '#f8c2ce',
+      vein: 'rgba(255, 255, 255, 0.6)',
+      edge: 'rgba(255, 240, 245, 0.7)'
+    }
   ];
 
   class Petal {
@@ -59,52 +105,91 @@ function initPetalAnimation() {
 
     reset(initial = false) {
       this.x = Math.random() * width;
-      this.y = initial ? Math.random() * height : -30;
-      this.size = Math.random() * 12 + 10;
-      this.speedY = Math.random() * 1.2 + 0.8;
-      this.speedX = Math.sin(Math.random() * 2) * 0.8;
+      this.y = initial ? Math.random() * height : -45;
+      this.size = Math.random() * 10 + 13; // 13px - 23px natural petal scale
+      this.speedY = Math.random() * 1.1 + 0.75;
+      this.speedX = (Math.random() - 0.5) * 0.7;
       this.rotation = Math.random() * Math.PI * 2;
-      this.rotationSpeed = (Math.random() - 0.5) * 0.025;
-      this.sway = Math.random() * 2 + 1;
-      this.swaySpeed = Math.random() * 0.02 + 0.01;
+      this.rotationSpeed = (Math.random() - 0.5) * 0.022;
+      this.sway = Math.random() * 2.2 + 1.2;
+      this.swaySpeed = Math.random() * 0.018 + 0.012;
       this.swayAngle = Math.random() * Math.PI * 2;
-      this.opacity = Math.random() * 0.35 + 0.55;
-      this.color = petalColors[Math.floor(Math.random() * petalColors.length)];
-      this.flip = Math.random() * Math.PI;
-      this.flipSpeed = Math.random() * 0.03 + 0.01;
+      this.opacity = Math.random() * 0.3 + 0.65;
+      this.color = rosePalettes[Math.floor(Math.random() * rosePalettes.length)];
+      this.flip = Math.random() * Math.PI * 2;
+      this.flipSpeed = Math.random() * 0.025 + 0.012;
+      this.roll = Math.random() * Math.PI * 2;
+      this.rollSpeed = Math.random() * 0.015 + 0.008;
+      // Slight asymmetric petal personality
+      this.curveRatio = Math.random() * 0.15 + 0.92;
     }
 
     update() {
       this.swayAngle += this.swaySpeed;
       this.flip += this.flipSpeed;
+      this.roll += this.rollSpeed;
       this.x += Math.sin(this.swayAngle) * this.sway + this.speedX;
       this.y += this.speedY;
       this.rotation += this.rotationSpeed;
 
-      if (this.y > height + 40 || this.x < -40 || this.x > width + 40) {
+      if (this.y > height + 50 || this.x < -60 || this.x > width + 60) {
         this.reset();
       }
     }
 
     draw() {
+      const s = this.size;
+      const cosFlip = Math.cos(this.flip);
+      const isBackSide = cosFlip < 0;
+
       ctx.save();
       ctx.translate(this.x, this.y);
       ctx.rotate(this.rotation);
-      ctx.scale(Math.cos(this.flip), 1);
+
+      // 3D perspective tumbling
+      const scaleX = cosFlip;
+      const scaleY = Math.sin(this.roll) * 0.28 + 0.78;
+      ctx.scale(scaleX, scaleY);
       ctx.globalAlpha = this.opacity;
 
+      // Authentic heart-cupped rose petal geometry
       ctx.beginPath();
-      // Draw organic curved rose petal path
-      ctx.moveTo(0, -this.size);
-      ctx.bezierCurveTo(this.size * 0.9, -this.size * 0.6, this.size * 0.8, this.size * 0.6, 0, this.size);
-      ctx.bezierCurveTo(-this.size * 0.8, this.size * 0.6, -this.size * 0.9, -this.size * 0.6, 0, -this.size);
+      // Start at gentle top center notch
+      ctx.moveTo(0, -s * 0.72);
+      // Top right lobe / crest
+      ctx.bezierCurveTo(s * 0.38, -s * 1.08, s * 0.94 * this.curveRatio, -s * 0.85, s * 0.98, -s * 0.2);
+      // Right flank tapering down to base
+      ctx.bezierCurveTo(s * 1.02, s * 0.45, s * 0.52, s * 0.9, 0, s);
+      // Base tip to left flank
+      ctx.bezierCurveTo(-s * 0.52, s * 0.9, -s * 1.02, s * 0.45, -s * 0.98, -s * 0.2);
+      // Left flank to top left crest and back to notch
+      ctx.bezierCurveTo(-s * 0.94 * this.curveRatio, -s * 0.85, -s * 0.38, -s * 1.08, 0, -s * 0.72);
       ctx.closePath();
 
-      ctx.fillStyle = this.color.fill;
+      // Velvety color gradient from tip to base
+      const grad = ctx.createLinearGradient(-s * 0.3, -s, s * 0.3, s);
+      if (isBackSide) {
+        grad.addColorStop(0, this.color.backTop);
+        grad.addColorStop(1, this.color.backBase);
+      } else {
+        grad.addColorStop(0, this.color.top);
+        grad.addColorStop(0.5, this.color.mid);
+        grad.addColorStop(1, this.color.base);
+      }
+      ctx.fillStyle = grad;
       ctx.fill();
 
-      ctx.strokeStyle = this.color.stroke;
-      ctx.lineWidth = 0.6;
+      // Delicate inner petal central vein / curl contour
+      ctx.beginPath();
+      ctx.moveTo(0, -s * 0.65);
+      ctx.quadraticCurveTo(s * 0.12, 0, 0, s * 0.88);
+      ctx.strokeStyle = this.color.vein;
+      ctx.lineWidth = 0.9;
+      ctx.stroke();
+
+      // Soft dewy rim highlight on the outer petal edge
+      ctx.strokeStyle = this.color.edge;
+      ctx.lineWidth = 0.5;
       ctx.stroke();
 
       ctx.restore();
