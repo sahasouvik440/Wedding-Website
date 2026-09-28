@@ -382,40 +382,65 @@ function initAmbientAudio() {
   const audio = document.getElementById('bg-music');
   const btn = document.getElementById('music-toggle-btn');
   if (!audio || !btn) return;
+  const icon = btn.querySelector('i');
 
-  let isPlaying = false;
+  audio.volume = 0.35; // Soft ambient wedding volume
 
-  function toggleMusic() {
+  function updateVisuals(isPlaying) {
+    if (isPlaying) {
+      btn.classList.add('is-playing', 'playing');
+      if (icon) {
+        icon.className = 'fa-solid fa-volume-high';
+      }
+      btn.setAttribute('aria-label', 'Pause Background Music');
+      btn.setAttribute('title', 'Pause Wedding Music');
+    } else {
+      btn.classList.remove('is-playing', 'playing');
+      if (icon) {
+        icon.className = 'fa-solid fa-music';
+      }
+      btn.setAttribute('aria-label', 'Play Background Music');
+      btn.setAttribute('title', 'Play Wedding Music');
+    }
+  }
+
+  function toggleMusic(e) {
+    if (e) e.stopPropagation();
     if (audio.paused) {
       audio.play().then(() => {
-        isPlaying = true;
-        btn.classList.add('is-playing');
+        updateVisuals(true);
       }).catch(err => {
-        console.warn('Playback prevented:', err);
+        console.warn('Audio playback prevented:', err);
       });
     } else {
       audio.pause();
-      isPlaying = false;
-      btn.classList.remove('is-playing');
+      updateVisuals(false);
     }
   }
 
   btn.addEventListener('click', toggleMusic);
 
-  // Auto-play on first user interaction (browser policy compliant)
+  audio.addEventListener('play', () => updateVisuals(true));
+  audio.addEventListener('pause', () => updateVisuals(false));
+
+  // Auto-play on first user gesture (compliant with modern browser autoplay policies)
+  let started = false;
   const startOnFirstGesture = () => {
-    if (audio.paused && !isPlaying) {
+    if (started) return;
+    started = true;
+    if (audio.paused) {
       audio.play().then(() => {
-        isPlaying = true;
-        btn.classList.add('is-playing');
+        updateVisuals(true);
       }).catch(() => {});
     }
     window.removeEventListener('click', startOnFirstGesture);
     window.removeEventListener('touchstart', startOnFirstGesture);
   };
+
   window.addEventListener('click', startOnFirstGesture, { once: true });
   window.addEventListener('touchstart', startOnFirstGesture, { once: true });
 }
+
 
 /* ==========================================================================
    COUNTDOWN TIMER
@@ -573,37 +598,6 @@ function initScrollAnimations() {
     cardObserver.observe(infoCard);
   }
 }
-
-// Background Music Toggle
-document.addEventListener('DOMContentLoaded', () => {
-  const bgMusic = document.getElementById('bg-music');
-  const musicToggleBtn = document.getElementById('music-toggle-btn');
-  const musicIcon = musicToggleBtn.querySelector('i');
-  
-  if (bgMusic && musicToggleBtn) {
-    // Start with volume at 30% for soft background effect
-    bgMusic.volume = 0.3;
-
-    musicToggleBtn.addEventListener('click', () => {
-      if (bgMusic.paused) {
-        bgMusic.play().then(() => {
-          musicToggleBtn.classList.add('playing');
-          // Change icon to pause or volume-high? Volume-up is nice
-          musicIcon.classList.remove('fa-music');
-          musicIcon.classList.add('fa-volume-up');
-        }).catch((err) => {
-          console.error('Audio playback failed:', err);
-        });
-      } else {
-        bgMusic.pause();
-        musicToggleBtn.classList.remove('playing');
-        // Revert icon
-        musicIcon.classList.remove('fa-volume-up');
-        musicIcon.classList.add('fa-music');
-      }
-    });
-  }
-});
 
 
 

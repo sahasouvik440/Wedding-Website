@@ -2737,42 +2737,6 @@ h1, h2, h3, h4, h5, h6,
 }
 
 
-/* Music Toggle Button */
-.music-toggle-btn {
-  position: fixed;
-  bottom: 24px;
-  left: 24px;
-  width: 50px;
-  height: 50px;
-  background-color: var(--gold-primary);
-  color: var(--bg-dark-base);
-  border: none;
-  border-radius: 50%;
-  font-size: 1.2rem;
-  cursor: pointer;
-  z-index: 1000;
-  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
-  transition: transform 0.3s ease, background-color 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.music-toggle-btn:hover {
-  transform: scale(1.1);
-  background-color: var(--gold-light);
-}
-
-.music-toggle-btn.playing {
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); }
-  70% { box-shadow: 0 0 0 15px rgba(212, 175, 55, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
-}
-
 
 /* ==========================================================================
    AMBIENCE MUSIC DROPDOWN
@@ -3173,41 +3137,45 @@ h1, h2, h3, h4, h5, h6,
   position: fixed;
   bottom: 28px;
   right: 28px;
-  width: 50px;
-  height: 50px;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
-  background: #3C1E10;
+  background: linear-gradient(135deg, #3C1E10 0%, #1A0508 100%);
   color: #D4AF37;
-  border: 1.5px solid #D4AF37;
+  border: 2px solid #D4AF37;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.15rem;
+  font-size: 1.25rem;
   cursor: pointer;
-  z-index: 999;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
-  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.4, 1);
+  z-index: 10001;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45), 0 0 14px rgba(212, 175, 55, 0.35);
+  transition: all 0.35s cubic-bezier(0.2, 0.8, 0.4, 1);
+  outline: none;
 }
 
 .music-toggle-btn:hover {
-  transform: scale(1.08);
-  background: #5C3317;
-  color: #FFF8EE;
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+  transform: scale(1.1) translateY(-2px);
+  background: linear-gradient(135deg, #5C3317 0%, #2D0A10 100%);
+  color: #FFF2CC;
+  border-color: #F3E5AB;
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.55), 0 0 20px rgba(212, 175, 55, 0.6);
 }
 
-.music-toggle-btn.is-playing {
-  animation: pulseMusic 2.2s infinite ease-in-out;
-  background: #5C3317;
+.music-toggle-btn.is-playing,
+.music-toggle-btn.playing {
+  animation: pulseMusic 2s infinite ease-in-out;
+  background: linear-gradient(135deg, #4A1A10 0%, #200408 100%);
   color: #FFEAA7;
+  border-color: #FFDF73;
 }
 
 @keyframes pulseMusic {
   0%, 100% {
-    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.45), 0 4px 18px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.5), 0 6px 20px rgba(0, 0, 0, 0.45);
   }
   50% {
-    box-shadow: 0 0 0 9px rgba(212, 175, 55, 0), 0 6px 24px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 0 0 12px rgba(212, 175, 55, 0), 0 8px 28px rgba(0, 0, 0, 0.55);
   }
 }
 
