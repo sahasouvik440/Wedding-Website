@@ -2504,14 +2504,19 @@ h1, h2, h3, h4, h5, h6,
 .wedding-countdown-container {
   text-align: center;
   position: relative;
-  left: 0;
-  margin: 32px auto 44px;
-  padding: 36px 24px 48px;
-  max-width: 900px;
-  width: calc(100% - 32px);
+  left: 0 !important;
+  right: 0 !important;
+  margin: 0 !important;
+  padding: 90px 24px;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-height: 80vh;
   background: var(--bg-dark-card);
-  border: 1px solid rgba(212, 175, 55, 0.25);
-  border-radius: 24px;
+  border-top: 1px solid rgba(212, 175, 55, 0.35);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.35);
+  border-left: none !important;
+  border-right: none !important;
+  border-radius: 0 !important;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -2860,8 +2865,10 @@ h1, h2, h3, h4, h5, h6,
   overflow: hidden;
   left: 0 !important;
   right: 0 !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
   box-sizing: border-box;
 }
 
@@ -2869,11 +2876,11 @@ h1, h2, h3, h4, h5, h6,
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100% !important;
+  height: 100% !important;
   cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='28' fill='rgba(255,255,255,0.4)' stroke='%23fff' stroke-width='2'/%3E%3C/svg%3E") 32 32, crosshair;
   z-index: 10;
-  border-radius: inherit;
+  border-radius: 0 !important;
   touch-action: none;
   -webkit-touch-callout: none;
   user-select: none;
@@ -3327,12 +3334,16 @@ h1, h2, h3, h4, h5, h6,
 
   /* Countdown */
   .wedding-countdown-container {
-    margin: 20px auto 40px !important;
-    padding: 24px 16px 44px;
+    margin: 0 !important;
+    padding: 70px 20px !important;
     left: 0 !important;
     right: 0 !important;
-    width: calc(100% - 32px) !important;
-    max-width: 800px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 75vh !important;
+    border-radius: 0 !important;
+    border-left: none !important;
+    border-right: none !important;
     box-sizing: border-box;
   }
   .countdown-title { font-size: 1rem; letter-spacing: 2.5px; margin-bottom: 20px; }
@@ -3449,13 +3460,16 @@ h1, h2, h3, h4, h5, h6,
 
   /* Countdown */
   .wedding-countdown-container {
-    padding: 22px 14px 36px;
-    margin: 16px auto 32px !important;
+    padding: 65px 14px 75px !important;
+    margin: 0 !important;
     left: 0 !important;
     right: 0 !important;
-    width: calc(100% - 24px) !important;
-    max-width: 480px !important;
-    border-radius: 18px;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 70vh !important;
+    border-radius: 0 !important;
+    border-left: none !important;
+    border-right: none !important;
     box-sizing: border-box;
   }
   .countdown-title { font-size: 0.85rem; letter-spacing: 2px; margin-bottom: 16px; }
@@ -3560,12 +3574,16 @@ h1, h2, h3, h4, h5, h6,
   .love-story-heading { font-size: 2rem; }
 
   .wedding-countdown-container {
-    width: calc(100% - 16px) !important;
-    max-width: 360px !important;
-    padding: 18px 8px 28px;
-    margin: 12px auto 24px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 55px 10px 65px !important;
+    margin: 0 !important;
     left: 0 !important;
     right: 0 !important;
+    min-height: 70vh !important;
+    border-radius: 0 !important;
+    border-left: none !important;
+    border-right: none !important;
     box-sizing: border-box;
   }
   .countdown-timer { flex-wrap: wrap; justify-content: center; row-gap: 10px; }
@@ -3732,23 +3750,32 @@ h1, h2, h3, h4, h5, h6,
   position: relative;
   left: 0 !important;
   right: 0 !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-  width: calc(100% - 32px);
-  max-width: 900px;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-height: 80vh !important;
   background:
-    linear-gradient(135deg, rgba(28,5,11,0.92) 0%, rgba(20,3,8,0.88) 50%, rgba(35,7,15,0.92) 100%);
+    radial-gradient(ellipse 90% 70% at 50% 50%, rgba(42,8,18,0.95) 0%, rgba(20,3,8,0.92) 50%, rgba(12,2,5,0.96) 100%);
   backdrop-filter: blur(20px) saturate(150%);
   -webkit-backdrop-filter: blur(20px) saturate(150%);
-  border: 1px solid rgba(212,175,55,0.2);
-  border-radius: 24px;
+  border-top: 1.5px solid rgba(212,175,55,0.35) !important;
+  border-bottom: 1.5px solid rgba(212,175,55,0.35) !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-radius: 0 !important;
   box-shadow:
-    0 30px 80px rgba(0,0,0,0.6),
-    0 0 0 1px rgba(212,175,55,0.08),
+    0 40px 100px rgba(0,0,0,0.7),
     inset 0 1px 0 rgba(255,255,255,0.06),
-    inset 0 -1px 0 rgba(0,0,0,0.2);
+    inset 0 -1px 0 rgba(0,0,0,0.3);
   overflow: hidden;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Animated top border accent on countdown */
